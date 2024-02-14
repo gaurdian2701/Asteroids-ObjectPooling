@@ -9,20 +9,20 @@ public class BulletPool
     private BulletView bulletView;
     private BulletScriptableObject bulletSO;
 
-    private List<PooledBullet> bulletList;
+    private List<PooledBullet> bulletsInPool;
     public BulletPool(BulletScriptableObject _bulletSO, BulletView _bulletView) 
     {
         bulletSO = _bulletSO;
         bulletView = _bulletView;
 
-        bulletList = new List<PooledBullet>();
+        bulletsInPool = new List<PooledBullet>();
     }
 
     public BulletController GetBullet() 
     {
-        if(bulletList.Count > 0)
+        if(bulletsInPool.Count > 0)
         {
-            PooledBullet bullet = bulletList.Find((bullet) => !bullet.isUsed);
+            PooledBullet bullet = bulletsInPool.Find((bullet) => !bullet.isUsed);
 
             if(bullet != null)
             {
@@ -33,6 +33,12 @@ public class BulletPool
         return CreateNewBulletInstance();
     }
 
+    public void ReturnBullet(BulletController _bulletController)
+    {
+        PooledBullet bulletInPool = bulletsInPool.Find(bulletInstance => bulletInstance.bulletController == _bulletController);
+        bulletInPool.isUsed = false;
+    }
+
     private BulletController CreateNewBulletInstance()
     {
         BulletController bullet = new BulletController(bulletView, bulletSO);
@@ -40,7 +46,7 @@ public class BulletPool
 
         pooledBullet.bulletController = bullet;
         pooledBullet.isUsed = true;
-        bulletList.Add(pooledBullet);
+        bulletsInPool.Add(pooledBullet);
 
         return bullet;
     }

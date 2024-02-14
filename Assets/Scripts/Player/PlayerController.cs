@@ -137,6 +137,8 @@ namespace CosmicCuration.Player
 
         public Vector3 GetPlayerPosition() => playerView != null ? playerView.transform.position : default;
 
+        public void ReturnBulletToPool(BulletController bulletController) { bulletPool.ReturnBullet(bulletController); }
+
         private enum WeaponMode
         {
             SingleCanon,
