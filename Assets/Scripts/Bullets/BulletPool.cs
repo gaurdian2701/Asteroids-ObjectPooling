@@ -22,12 +22,12 @@ public class BulletPool
     {
         if(bulletsInPool.Count > 0)
         {
-            PooledBullet bullet = bulletsInPool.Find((bullet) => !bullet.isUsed);
+            PooledBullet bulletInstance = bulletsInPool.Find((bullet) => !bullet.isUsed);
 
-            if(bullet != null)
+            if(bulletInstance != null)
             {
-                bullet.isUsed = true;
-                return bullet.bulletController;
+                bulletInstance.isUsed = true;
+                return bulletInstance.bulletController;
             }
         }
         return CreateNewBulletInstance();
