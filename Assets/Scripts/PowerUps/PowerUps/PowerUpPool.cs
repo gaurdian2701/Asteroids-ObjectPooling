@@ -28,7 +28,6 @@ namespace CosmicCuration.PowerUps
                 return new DoubleTurret(powerUpData);
 
             throw new NotSupportedException("Power up type not supported!");
-
         }
     }
 }
