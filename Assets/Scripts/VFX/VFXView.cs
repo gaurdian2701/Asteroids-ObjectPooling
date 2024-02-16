@@ -23,7 +23,6 @@ namespace CosmicCuration.VFX
             {
                 if (item.type == type)
                 {
-                    Debug.Log(item.particleSystem);
                     item.particleSystem.gameObject.SetActive(true);
                     currentVFXPlaying = item.particleSystem;
                 }
